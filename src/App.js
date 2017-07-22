@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+// Add Link in BrowserRouter
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+import Dashboard from './dashboard';
+import View from './view';
 import './App.css';
 
-class App extends Component {
+export default class App extends Component {
+  // constructor(props) {
+  //   super(props);
+  // }
+
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+      <Router>
+        <div className="app">
+          <Route exact path="/dashboard" component={Dashboard} />
+          <Route exact path="/view/:deckId" component={View} />
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      </Router>
     );
   }
 }
-
-export default App;
