@@ -9,9 +9,9 @@ export default (props) => {
             <img className="playerPicture" 
                 src={props.image}
                 width="300" height="400"/>
-            <div className="links">
-                <Link className="dashboardButton" to={`/view/${props.name}`}>View Deck</Link>
-                <Link className="dashboardButton" to={`/battle/${props.name}`}>Battle!</Link>
+            <div className="btn-group btn-group-justified" role="group">
+                <Link className="btn btn-info" to={`/view/${props.name}`}>View Deck</Link>
+                <Link className="btn btn-success" to={`/battle/${props.name}`}>Battle!</Link>
             </div>
         </div>
     )

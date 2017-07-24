@@ -1,7 +1,7 @@
 const fs = require('fs');
 const parse = require('csv-parse/lib/sync');
 
-const data = fs.readFileSync('./baseball_stats/FanGraphs_Leaderboard.csv', 'utf8');
+const data = fs.readFileSync('./baseball_stats/mlb_legends_leaderboard.csv', 'utf8');
 //2016_season.csv
 //FanGraphs_Leaderboard.csv
 
@@ -13,6 +13,11 @@ const records = parse(data, {columns: true, auto_parse: true}).map(function(reco
         runsBattedIn: record.RBI,
         avg: record.AVG,
         onBasePercentage: record.OBP,
+        isolatedPower: record.ISO,
+        battingAverageOnBallsInPlay: record.BABIP,
+        weightedOnBaseAverage: record.wOBA,
+        weightedRunsCreatedPlus: record["wRC+"], 
+        baseRunning: record.BsR
     }
 });
 
