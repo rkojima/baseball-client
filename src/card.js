@@ -26,7 +26,7 @@ export default (props) => {
                     <li>Batting Average On Balls In Play (BABIP): {props.battingAverageOnBallsInPlay}</li>
                     <li>Weighted On Base Average (WOBA): {props.weightedOnBaseAverage}</li>
                     <li>Weighted Runs Created Plus (wRC+): {props.weightedRunsCreatedPlus}</li>
-                    <li>Base Running: {props.baseRunning}</li>
+                    <li>Base Running (BR): {props.baseRunning}</li>
                 </ul>
             </div>
         );

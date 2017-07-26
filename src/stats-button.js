@@ -14,10 +14,10 @@ export default class buttons extends React.Component {
         return (
             <div className="toggleButtons btn-group btn-group-justified" role="group">
                 <button className="btn btn-primary" onClick={this.handleButtonClicked} style={{width: "150px"}} value="standard">
-                    Standard
+                    Standard Stats
                 </button>
                 <button className="btn btn-danger" onClick={this.handleButtonClicked} style={{width: "150px"}} value="advanced">
-                    Advanced
+                    Advanced Stats
                 </button>
             </div>
         );
