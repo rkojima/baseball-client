@@ -58,3 +58,18 @@ ul {
 body {
   padding-top: 50px;
 }
+
+.weaponButton + .weaponButton {
+  margin-top: 10px;
+}
+
+.weaponPage {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.weaponTitle {
+  display: flex;
+  margin: auto;
+}

@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import Dashboard from './dashboard';
 import View from './view';
+import Battle from './battle';
+import Weapon from './weapon';
 import './App.css';
 
 export default class App extends Component {
@@ -21,6 +23,8 @@ export default class App extends Component {
           </nav>
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/view/:deckId" component={View} />
+          <Route exact path="/battle/:deckId" component={Weapon} />
+          <Route exact path="/battle/:deckId/:weapon/computer" component={Battle} />
         </div>
       </Router>
     );
