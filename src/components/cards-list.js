@@ -1,5 +1,5 @@
 import React from 'react';
-import Decks from './data/decks.json';
+import Decks from '../data/decks.json';
 import Card from './card';
 
 export default (props) => {

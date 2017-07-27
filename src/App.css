@@ -59,6 +59,11 @@ body {
   padding-top: 50px;
 }
 
+.weaponButton {
+  width: 300px;
+  margin: auto;
+}
+
 .weaponButton + .weaponButton {
   margin-top: 10px;
 }
@@ -72,4 +77,6 @@ body {
 .weaponTitle {
   display: flex;
   margin: auto;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 // import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
-import Decks from './data/decks.json';
+import Decks from '../data/decks.json';
 import Deck from './deck';
 
 export default (props) => {

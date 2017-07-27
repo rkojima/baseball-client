@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 // Add Link in BrowserRouter
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
-import Dashboard from './dashboard';
-import View from './view';
-import Battle from './battle';
-import Weapon from './weapon';
+import Dashboard from './components/dashboard';
+import View from './components/view';
+import Battle from './components/battle';
+import Weapon from './components/weapon';
 import './App.css';
 
 export default class App extends Component {
