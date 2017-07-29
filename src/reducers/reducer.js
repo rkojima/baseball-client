@@ -1,7 +1,8 @@
 import {
     START_GAME, 
     CHOOSE_ATTRIBUTE,
-    WIN_CARD
+    MOUNT,
+    COMPUTER_TURN
 } from '../actions/actions';
 
 import Deck from '../data/decks.json';
@@ -12,6 +13,7 @@ const initialState = {
     playerOneDeck: [],
     playerTwoDeck: [],
     winOrLose: true,
+    playerOneTurn: true,
 }
 
 function shuffle(array) {
@@ -28,7 +30,7 @@ function shuffle(array) {
     return array;
 }
 
-export default (state, action) => {
+export default (state = initialState, action) => {
     state = state || initialState;
 
     if (action.type === START_GAME) {
@@ -56,21 +58,58 @@ export default (state, action) => {
                 delete entry.onBasePercentage;
             })
         }
-        console.log(randomizedDeck);
+        let tempDeckOne = randomizedDeck.slice(0,15);
+        let tempDeckTwo = randomizedDeck.slice(-15);
         state = Object.assign({}, initialState, {
-            playerOneDeck: randomizedDeck.slice(0, 15),
-            playerTwoDeck: randomizedDeck.slice(-15),
+            playerOneDeck: tempDeckOne,
+            playerTwoDeck: tempDeckTwo,
         });
         console.log(state.playerOneDeck);
         console.log(state.playerTwoDeck);
         return state;
     }
     else if (action.type === CHOOSE_ATTRIBUTE) {
-        const attr = action.selection;
+        console.log(action.selection);
+        let p1 = state.playerOneDeck[0][action.selection];
+        let p2 = state.playerTwoDeck[0][action.selection];
+        let tempDeckOne = state.playerOneDeck;
+        let tempDeckTwo = state.playerTwoDeck;
+
+        //TODO when you lose all cards
+
+        if (p1 > p2 || p1 === p2) {
+            console.log("Player One Wins!");
+            tempDeckOne.push(tempDeckTwo[0]);
+            tempDeckTwo.splice(0, 1);
+            tempDeckOne.push(tempDeckOne.shift());
+            let newState = Object.assign({}, state, {
+                playerOneDeck: tempDeckOne,
+                playerTwoDeck: tempDeckTwo,
+                playerOneTurn: !state.playerOneTurn
+            });
+            return newState;
+        } else {
+            console.log("Computer Wins!");
+            tempDeckTwo.push(tempDeckOne[0]);
+            tempDeckOne.splice(0, 1);
+            tempDeckTwo.push(tempDeckTwo.shift());
+            let newState = Object.assign({}, state, {
+                playerOneDeck: tempDeckOne,
+                playerTwoDeck: tempDeckTwo,
+                playerOneTurn: !state.playerOneTurn
+            });
+            return newState;
+        }
         // Get player name and attribute chosen
         // Compare with opponent's attribute
         // If higher number, get their card 
         // If not, top card gets taken
+    }
+    else if (action.type === MOUNT) {
+        return state;
+    }
+    else if (action.type === COMPUTER_TURN) {
+        return state;
     }
 }
 

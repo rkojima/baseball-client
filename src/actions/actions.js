@@ -11,8 +11,12 @@ export const chooseAttribute = (selection) => ({
     selection
 });
 
-export const WIN_CARD = 'WIN_CARD';
-export const winCard = (card, deck) => ({
-    type: WIN_CARD,
+export const MOUNT = 'MOUNT';
+export const mount = () => ({
+    type: MOUNT,
+})
 
-});
+export const COMPUTER_TURN = 'COMPUTER_TURN';
+export const computerTurn = () => ({
+    type: COMPUTER_TURN,
+})

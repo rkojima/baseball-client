@@ -80,3 +80,33 @@ body {
   margin-bottom: 20px;
   margin-top: 20px;
 }
+
+.clicked {
+  display: none;
+}
+
+.stats {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  display: none;
+}
+
+label {
+  font-weight: normal;
+}
+
+.battlePage {
+  display: flex;
+}
+
+.radioButton {
+  display: block;
+}
+
+.row {
+  display: flex;
+  margin: 0;
+}
