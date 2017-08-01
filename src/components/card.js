@@ -15,10 +15,11 @@ export class Card extends React.Component {
         this.props.dispatch(actions.chooseAttribute(value));
     }
 
+    // Player One turn, show modal page saying who won, which stats were compared
+
     render() {
         let radioButton = this.props.radioButton === undefined ? "" : "radioButton";
         if (this.props.isolatedPower === undefined) {
-            console.log(radioButton);
             return (
                 <div>
                     <img className="playerPicture" 
@@ -82,4 +83,8 @@ export class Card extends React.Component {
     }
 }
 
-export default connect()(Card);
+const mapStateToProps = (state, props) => ({
+    reduxState: state,
+});
+
+export default connect(mapStateToProps)(Card);

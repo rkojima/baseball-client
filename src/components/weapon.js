@@ -10,6 +10,7 @@ export class Weapon extends React.Component {
     constructor(props) {
         super(props);
         this.newGame = this.newGame.bind(this);
+        this.cardToRender = this.cardToRender.bind(this);
         this.state = {
             buttonClicked: false,
         }
@@ -22,41 +23,21 @@ export class Weapon extends React.Component {
     newGame(value) {
         this.setState({buttonClicked: true});
         this.props.dispatch(actions.startGame(this.props.match.params.deckId, value));
+        console.log(this.props);
+        this.props.history.push('/battle/' + this.props.match.params.deckId + '/fight', [this.state]);
     }
 
     cardToRender() {
+        console.log(this.props.match.params.deckId);
         if (this.state.buttonClicked) {
-        return (
-            <div className="cardList">
-                <h3>{this.props.reduxState.playerOneDeck[0].name}</h3>
-                <Card className="cardList"
-                radioButton={true}
-                hits={this.props.reduxState.playerOneDeck[0].hits}
-                avg={this.props.reduxState.playerOneDeck[0].avg}
-                runsBattedIn={this.props.reduxState.playerOneDeck[0].runsBattedIn}
-                onBasePercentage={this.props.reduxState.playerOneDeck[0].onBasePercentage}
-                winsAboveReplacement={this.props.reduxState.playerOneDeck[0].winsAboveReplacement}
-                isolatedPower={this.props.reduxState.playerOneDeck[0].isolatedPower}
-                battingAverageOnBallsInPlay={this.props.reduxState.playerOneDeck[0].battingAverageOnBallsInPlay}
-                weightedOnBaseAverage={this.props.reduxState.playerOneDeck[0].weightedOnBaseAverage}
-                weightedRunsCreatedPlus={this.props.reduxState.playerOneDeck[0].weightedRunsCreatedPlus}
-                baseRunning={this.props.reduxState.playerOneDeck[0].baseRunning}
-                />
-            </div>
-        )};
-    }
-
-    computerTurn() {
-        this.props.dispatch(actions.computerTurn());
+            console.log(this.props);
+    };
     }
 
     render() {
         let clicked = this.state.buttonClicked ? " clicked" : "";
         let cardAppears = this.state.buttonClicked ? "" : "hidden ";
-        if (this.props.playerOneTurn != true) {
-            this.computerTurn();
-        }
-        console.log(this.props);
+        // TODO Isn't working right now, playerOneTurn is undefined
         return (
             <div className="battlePage">
                 <div className={"weaponPage" + clicked}>
@@ -68,7 +49,6 @@ export class Weapon extends React.Component {
                     Advanced Statistics
                     </button>
                 </div>
-                {this.cardToRender()}
             </div>
         );
     }
