@@ -56,16 +56,6 @@ function battle(state, selection) {
 
     //TODO when you lose all cards
 
-    
-    <div>
-        <h3>PlayerOneName Here</h3>
-        <p>Chosen Attribute Value Here</p>
-        <h2>VS.</h2>
-        <h3>PlayerTwoName Here</h3>
-        <p>Chosen Attribute Value Here</p>
-    </div>
-
-
     if (p1 > p2 || p1 === p2) {
         console.log("Player One Wins!");
         tempDeckOne.push(tempDeckTwo[0]);

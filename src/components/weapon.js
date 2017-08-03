@@ -1,10 +1,7 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-import Deck from '../data/decks.json';
 import * as actions from '../actions/actions';
-import Card from './card';
 
 export class Weapon extends React.Component {
     constructor(props) {
@@ -31,12 +28,11 @@ export class Weapon extends React.Component {
         console.log(this.props.match.params.deckId);
         if (this.state.buttonClicked) {
             console.log(this.props);
-    };
+        };
     }
 
     render() {
         let clicked = this.state.buttonClicked ? " clicked" : "";
-        let cardAppears = this.state.buttonClicked ? "" : "hidden ";
         // TODO Isn't working right now, playerOneTurn is undefined
         return (
             <div className="battlePage">
@@ -54,8 +50,6 @@ export class Weapon extends React.Component {
     }
 }
 
-const mapStateToProps = (state, props) => ({
-    reduxState: state,
-})
+const mapStateToProps = (state, props) => state;
 
 export default connect(mapStateToProps)(Weapon);

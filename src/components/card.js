@@ -12,19 +12,31 @@ export class Card extends React.Component {
 
     chooseAttribute(e, value) {
         e.preventDefault();
-        this.props.dispatch(actions.chooseAttribute(value));
+        console.log("triggered from card.js");
+        this.setState({battling: true});
+        this.props.history.push({pathname: '/battle/' + this.props.match.params.deckId + '/fight/arena',
+            state: {value: value}});
     }
+
+    computerTurn() {
+        console.log("Did this go here?");
+        this.props.history.push('/battle/' + this.props.match.params.deckId + '/fight/arena');
+        this.props.dispatch(actions.computerTurn());
+    }
+
 
     // Player One turn, show modal page saying who won, which stats were compared
 
+    //(e) => this.chooseAttribute(e, document.querySelector('input[name="radio"]:checked').id)
+    //used for form, onSubmit
     render() {
         let radioButton = this.props.radioButton === undefined ? "" : "radioButton";
         if (this.props.isolatedPower === undefined) {
             return (
                 <div>
                     <img className="playerPicture" 
-                    width="300" height="400"/>
-                    <form className="stats" onSubmit={(e) => this.chooseAttribute(e, document.querySelector('input[name="radio"]:checked').id)}>
+                    width="300" height="400" alt="Player with Standard Stats"/>
+                    <form className="stats" onSubmit={(e) => this.props.onSubmit(e, document.querySelector('input[name="radio"]:checked').id)}>
                         <div className="row">
                             <input className={radioButton} type="radio" name="radio" id="avg" required/>
                             <label htmlFor="avg">Average: {this.props.avg}</label>
@@ -53,8 +65,8 @@ export class Card extends React.Component {
             return (
                 <div>
                     <img className="playerPicture" 
-                    width="300" height="400"/>
-                    <form className="stats" onSubmit={(e) => this.chooseAttribute(e, document.querySelector('input[name="radio"]:checked').id)}>
+                    width="300" height="400" alt="Player with Advanced Stats"/>
+                    <form className="stats" onSubmit={this.props.onSubmit}>
                         <div className="row">
                             <input className={radioButton} type="radio" name="radio" id="isolatedPower" required/>
                             <label htmlFor="iso">Isolated Power (ISO): {this.props.isolatedPower}</label>
@@ -83,8 +95,6 @@ export class Card extends React.Component {
     }
 }
 
-const mapStateToProps = (state, props) => ({
-    reduxState: state,
-});
+const mapStateToProps = (state, props) => state;
 
 export default connect(mapStateToProps)(Card);
