@@ -4,6 +4,7 @@ import {
     MOUNT,
     COMPUTER_TURN,
     EXIT_GAME,
+    SET_ONLY_ATTRIBUTE,
 } from '../actions/actions';
 
 import Deck from '../data/decks.json';
@@ -83,6 +84,42 @@ function battle(state, selection) {
     }
 }
 
+function statsAsText(selection) {
+    switch(selection) {
+        case "avg":
+            return "Average: ";
+            break;
+        case "hits":
+            return "Hits: ";
+            break;
+        case "isolatedPower":
+            return "Isolated Power: ";
+            break;
+        case "battingAverageOnBallsInPlay":
+            return "Batting Average On Balls In Play: ";
+            break;
+        case "weightedOnBaseAverage":
+            return "Weighted On Base Average: ";
+            break;
+        case "weightedRunsCreatedPlus":
+            return "Weighted Runs Created Plus: ";
+            break;
+        case "baseRunning":
+            return "Base Running";
+            break;
+        case "winsAboveReplacement":
+            return "Wins Above Replacement";
+            break;
+        case "runsBattedIn":
+            return "Runs Batted In";
+            break;
+        case "onBasePercentage":
+            return "On Base Percentage";
+            break;
+    }
+}
+
+
 export default (state = initialState, action) => {
     state = state || initialState;
 
@@ -122,6 +159,17 @@ export default (state = initialState, action) => {
         console.log(state.playerTwoDeck);
         return state;
     }
+
+    else if (action.type === SET_ONLY_ATTRIBUTE) {
+        console.log(action.selection);
+        const selectionText = statsAsText(action.selection);
+        state = Object.assign({}, state, {
+            selection: action.selection,
+            statsAsText: selectionText,
+        })
+        return state;
+    }
+
     else if (action.type === CHOOSE_ATTRIBUTE) {
         return battle(state, action.selection);
         // Get player name and attribute chosen
@@ -140,4 +188,5 @@ export default (state = initialState, action) => {
     else if (action.type === EXIT_GAME) {
         return initialState;
     }
+    return state;
 }

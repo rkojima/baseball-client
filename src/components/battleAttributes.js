@@ -25,11 +25,13 @@ export class BattleAttributes extends React.Component {
         }
     }
 
-    showBattle(e) {
+    showBattle(e, value) {
         e.preventDefault();
+        console.log("Value: " + value);
         this.setState({
             battling: true,
-        })
+        });
+        this.props.dispatch(actions.setOnlyAttribute(value));
     }
 
     hideBattle() {
@@ -55,21 +57,22 @@ export class BattleAttributes extends React.Component {
 
     render() {
         console.log(this.props);
-
         // <Link to="/battle/:deckId" className="btn btn-primary">Link</Link>
         // <Link to={"/battle/" + this.props.match.params.deckId + "/compare"} className="btn btn-primary">Button Here</Link>
         const card = this.props.playerOneDeck[0];
-        console.log(this.props);
         const {battling} = this.state.battling;
+        const p1Card = this.props.playerOneDeck[0];
+        const p2Card = this.props.playerTwoDeck[0];
         if (this.state.battling) {
             // These could be components
             return (
                 <div>
                     <Battle 
-                    p1Name={this.props.playerOneDeck[0].name}
-                    p2Name={this.props.playerTwoDeck[0].name}
-                    p1Value={this.props.playerOneDeck[0][this.props.location.state.value]}
-                    p2Value={this.props.playerTwoDeck[0][this.props.location.state.value]}
+                    p1Name={p1Card.name}
+                    p2Name={p2Card.name}
+                    p1Value={p1Card[this.props.selection]}
+                    p2Value={p2Card[this.props.selection]}
+                    statsAsText={this.props.statsAsText}
                     onClick={() => this.hideBattle()} />
                 </div>
             )
@@ -82,7 +85,7 @@ export class BattleAttributes extends React.Component {
                         radioButton={true}
                         {...card}
                         {...this.props}
-                        onSubmit={(e) => this.showBattle(e)}/>
+                        onSubmit={(e, attribute) => this.showBattle(e, attribute)}/>
                     </div>
                 </div>
             )
@@ -90,6 +93,8 @@ export class BattleAttributes extends React.Component {
     }
 }
 
-const mapStateToProps = (state, props) => state;
-
+const mapStateToProps = (state, props) => {
+  console.log(state);
+  return state;
+}
 export default connect(mapStateToProps)(BattleAttributes);

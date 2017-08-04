@@ -36,7 +36,7 @@ export class Card extends React.Component {
                 <div>
                     <img className="playerPicture" 
                     width="300" height="400" alt="Player with Standard Stats"/>
-                    <form className="stats" onSubmit={(e) => this.props.onSubmit(e, document.querySelector('input[name="radio"]:checked').id)}>
+                    <form className="stats" onSubmit={(e, value) => this.props.onSubmit(e, document.querySelector('input[name="radio"]:checked').id)}>
                         <div className="row">
                             <input className={radioButton} type="radio" name="radio" id="avg" required/>
                             <label htmlFor="avg">Average: {this.props.avg}</label>
@@ -95,6 +95,8 @@ export class Card extends React.Component {
     }
 }
 
-const mapStateToProps = (state, props) => state;
-
+const mapStateToProps = (state, props) => {
+  console.log(state);
+  return state;
+}
 export default connect(mapStateToProps)(Card);

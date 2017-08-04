@@ -18,9 +18,7 @@ export class App extends Component {
   //TODO Have alert post when they exit in middle of game
 
   startedBattle() {
-    if (this.props === undefined) {
-      return (<Link to="/dashboard" className="navbar-brand">Baseball</Link>);
-    } else if (this.props.startedGame === true) {
+    if (this.props.startedGame === true) {
       console.log("Redux started game. " + this.props.startedGame);
       console.log(this.props);
       if (this.props.playerOneTurn === false) {
@@ -57,6 +55,9 @@ export class App extends Component {
   }
 }
 
-const mapStateToProps = (state, props) => state;
+const mapStateToProps = (state, props) => {
+  console.log(state);
+  return state;
+}
 
 export default connect(mapStateToProps)(App);

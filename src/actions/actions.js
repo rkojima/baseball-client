@@ -25,3 +25,9 @@ export const EXIT_GAME = "EXIT_GAME";
 export const exitGame = () => ({
     type: EXIT_GAME,
 })
+
+export const SET_ONLY_ATTRIBUTE = "SET_ONLY_ATTRIBUTE";
+export const setOnlyAttribute = (selection) => ({
+    type: SET_ONLY_ATTRIBUTE,
+    selection
+})

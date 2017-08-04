@@ -50,6 +50,8 @@ export class Weapon extends React.Component {
     }
 }
 
-const mapStateToProps = (state, props) => state;
-
+const mapStateToProps = (state, props) => {
+  console.log(state);
+  return state;
+}
 export default connect(mapStateToProps)(Weapon);
