@@ -6,8 +6,6 @@ export default class Battle extends React.Component {
         super(props);
     }
     render() {
-        console.log(this.props);
-        console.log(this.props.statsAsText);
         return(
            <div>
                 <h3>{this.props.p1Name}</h3>

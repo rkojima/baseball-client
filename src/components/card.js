@@ -6,29 +6,7 @@ import {connect} from 'react-redux';
 export class Card extends React.Component {
     constructor(props) {
         super(props);
-        this.chooseAttribute = this.chooseAttribute.bind(this);
     }
-    // For deck of cards, needs cards, stats, possibly picture
-
-    chooseAttribute(e, value) {
-        e.preventDefault();
-        console.log("triggered from card.js");
-        this.setState({battling: true});
-        this.props.history.push({pathname: '/battle/' + this.props.match.params.deckId + '/fight/arena',
-            state: {value: value}});
-    }
-
-    computerTurn() {
-        console.log("Did this go here?");
-        this.props.history.push('/battle/' + this.props.match.params.deckId + '/fight/arena');
-        this.props.dispatch(actions.computerTurn());
-    }
-
-
-    // Player One turn, show modal page saying who won, which stats were compared
-
-    //(e) => this.chooseAttribute(e, document.querySelector('input[name="radio"]:checked').id)
-    //used for form, onSubmit
     render() {
         let radioButton = this.props.radioButton === undefined ? "" : "radioButton";
         if (this.props.isolatedPower === undefined) {
@@ -66,7 +44,7 @@ export class Card extends React.Component {
                 <div>
                     <img className="playerPicture" 
                     width="300" height="400" alt="Player with Advanced Stats"/>
-                    <form className="stats" onSubmit={this.props.onSubmit}>
+                    <form className="stats" onSubmit={(e, value) => this.props.onSubmit(e, document.querySelector('input[name="radio"]:checked').id)}>
                         <div className="row">
                             <input className={radioButton} type="radio" name="radio" id="isolatedPower" required/>
                             <label htmlFor="iso">Isolated Power (ISO): {this.props.isolatedPower}</label>
@@ -96,7 +74,6 @@ export class Card extends React.Component {
 }
 
 const mapStateToProps = (state, props) => {
-  console.log(state);
   return state;
 }
 export default connect(mapStateToProps)(Card);

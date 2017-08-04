@@ -81,10 +81,6 @@ body {
   margin-top: 20px;
 }
 
-.clicked {
-  display: none;
-}
-
 .stats {
   display: flex;
   flex-direction: column;

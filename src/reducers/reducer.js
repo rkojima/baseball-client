@@ -17,6 +17,7 @@ const initialState = {
     startedGame: false,
     winOrLose: true,
     playerOneTurn: true,
+    battling: false,
 }
 
 function shuffle(array) {
@@ -49,7 +50,6 @@ function randomAttribute(card) {
 }
 
 function battle(state, selection) {
-    console.log(selection);
     let p1 = state.playerOneDeck[0][selection];
     let p2 = state.playerTwoDeck[0][selection];
     let tempDeckOne = state.playerOneDeck;
@@ -77,7 +77,8 @@ function battle(state, selection) {
         let newState = Object.assign({}, state, {
             playerOneDeck: tempDeckOne,
             playerTwoDeck: tempDeckTwo,
-            playerOneTurn: !state.playerOneTurn
+            playerOneTurn: !state.playerOneTurn,
+            battling: false,
         });
         console.log("Is player one turn? " + newState.playerOneTurn);
         return newState;
@@ -154,18 +155,17 @@ export default (state = initialState, action) => {
             playerOneDeck: tempDeckOne,
             playerTwoDeck: tempDeckTwo,
             startedGame: true,
+            deck: action.deck,
         });
-        console.log(state.playerOneDeck);
-        console.log(state.playerTwoDeck);
         return state;
     }
 
     else if (action.type === SET_ONLY_ATTRIBUTE) {
-        console.log(action.selection);
         const selectionText = statsAsText(action.selection);
         state = Object.assign({}, state, {
             selection: action.selection,
             statsAsText: selectionText,
+            battling: true,
         })
         return state;
     }
