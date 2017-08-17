@@ -23,7 +23,7 @@ export class App extends Component {
       console.log(this.props);
       if (this.props.playerOneTurn === false) {
         console.log("It is not player one's turn");
-        this.props.dispatch(actions.computerTurn());
+        // this.props.dispatch(actions.computerSelection());
       }
       return (<Link to="/dashboard" className="navbar-brand" onClick={this.exitingBattle}>Baseball</Link>);
     } else {
@@ -56,7 +56,6 @@ export class App extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-  console.log(state);
   return state;
 }
 

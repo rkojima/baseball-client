@@ -16,6 +16,11 @@ export const mount = () => ({
     type: MOUNT,
 })
 
+export const COMPUTER_SELECTION = 'COMPUTER_SELECTION';
+export const computerSelection = () => ({
+    type: COMPUTER_SELECTION,
+})
+
 export const COMPUTER_TURN = 'COMPUTER_TURN';
 export const computerTurn = () => ({
     type: COMPUTER_TURN,

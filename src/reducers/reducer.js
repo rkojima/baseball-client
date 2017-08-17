@@ -5,12 +5,14 @@ import {
     COMPUTER_TURN,
     EXIT_GAME,
     SET_ONLY_ATTRIBUTE,
+    COMPUTER_SELECTION,
 } from '../actions/actions';
 
 import Deck from '../data/decks.json';
 
 const initialState = {
     selection: "",
+    statsAsText: "",
     deck: "",
     playerOneDeck: [],
     playerTwoDeck: [],
@@ -18,6 +20,7 @@ const initialState = {
     winOrLose: true,
     playerOneTurn: true,
     battling: false,
+    computerSelected: false,
 }
 
 function shuffle(array) {
@@ -63,9 +66,13 @@ function battle(state, selection) {
         tempDeckTwo.splice(0, 1);
         tempDeckOne.push(tempDeckOne.shift());
         let newState = Object.assign({}, state, {
+            selection: "",
+            statsAsText: "",
             playerOneDeck: tempDeckOne,
             playerTwoDeck: tempDeckTwo,
-            playerOneTurn: !state.playerOneTurn
+            playerOneTurn: !state.playerOneTurn,
+            computerSelected: false,
+            battling: false,
         });
         console.log("Is player one turn? " + newState.playerOneTurn);
         return newState;
@@ -75,9 +82,12 @@ function battle(state, selection) {
         tempDeckOne.splice(0, 1);
         tempDeckTwo.push(tempDeckTwo.shift());
         let newState = Object.assign({}, state, {
+            selection: "",
+            statsAsText: "",
             playerOneDeck: tempDeckOne,
             playerTwoDeck: tempDeckTwo,
             playerOneTurn: !state.playerOneTurn,
+            computerSelected: false,
             battling: false,
         });
         console.log("Is player one turn? " + newState.playerOneTurn);
@@ -180,10 +190,22 @@ export default (state = initialState, action) => {
     else if (action.type === MOUNT) {
         return state;
     }
+    else if (action.type === COMPUTER_SELECTION) {
+        console.log("Computer Selection");
+        let attr = randomAttribute(state.playerTwoDeck[0]);
+        let selectionText = statsAsText(attr);
+        state = Object.assign({}, state, {
+            selection: attr,
+            statsAsText: selectionText,
+            battling: true,
+            computerSelected: true,
+        })
+        return state;
+        // return battle(state, attr);
+    }
     else if (action.type === COMPUTER_TURN) {
         console.log("Computer Turn");
-        let attr = randomAttribute(state.playerTwoDeck[0]);
-        return battle(state, attr);
+        return battle(state, action.selection);
     }
     else if (action.type === EXIT_GAME) {
         return initialState;
